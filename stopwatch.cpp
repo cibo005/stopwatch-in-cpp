@@ -3,9 +3,9 @@
 #include <chrono>
 #include <thread>
 
-#define KB_ENTER 10
-#define KB_SPACE 32
-#define KB_BACKSPACE 8
+#define KB_s 115
+#define KB_t 116
+#define KB_r 114
 #define KB_ESC 27
 
 using namespace std;
@@ -81,9 +81,9 @@ int main()
         
         switch(kb)
             {
-            case KB_ENTER: st.start(); break;
-            case KB_SPACE: st.stop(); break;
-            case KB_BACKSPACE: st.reset(); break;
+            case KB_s: st.start(); break;
+            case KB_t: st.stop(); break;
+            case KB_r: st.reset(); break;
             }
         } 
     while (kb != KB_ESC);
