@@ -25,19 +25,18 @@ class Stopwatch
             min=0;
             state=false;
         }
-        void start()
-        {
-        state = true;
         
-        while(state)    
-            while(min < 60)
+        void run()
+        {
+        while(true)
+            while(min < 60 && state)
             {
-                while(sec < 60)
+                while(sec < 60 && state)
                     {
-                    while(milli < 100)
+                    while(milli < 100 && state)
                         {
-                            //printf("%d:%d,%d",min,sec,milli++);
                             cout<<"\r"<<setw(2)<<setfill('0')<<min<<":"<<setw(2)<<setfill('0')<<sec<<","<<setw(2)<<setfill('0')<<milli++<<flush;
+                            
                             this_thread::sleep_for(chrono::milliseconds(10)); 
                         }
                     milli=0;
@@ -52,7 +51,10 @@ class Stopwatch
                             
             }    
         }
-        
+        void start()
+        {
+            state = true;
+        }
         void stop()
         {
             state=false;
@@ -70,13 +72,18 @@ class Stopwatch
 
 int main()
 {
-    Stopwatch st;
+    
+    cout<<"Press s to start counting, t to stop it and r to reset it. Esc to exit."<<endl;
+
     char kb;
     
-    cout<<"Press enter to start counting, space to stop it and backspace to reset it."<<endl;
+    Stopwatch st;
     
+    thread w(&Stopwatch::run, ref(st));    
+
     do
         {
+
         cin>>kb;
         
         switch(kb)
@@ -87,5 +94,6 @@ int main()
             }
         } 
     while (kb != KB_ESC);
+    
     return 0;
 }
