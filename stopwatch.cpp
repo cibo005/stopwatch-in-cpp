@@ -39,15 +39,12 @@ class Stopwatch
                             
                             this_thread::sleep_for(chrono::milliseconds(10)); 
                         }
-                    milli=0;
-                    
-                    sec++;
-                            
+                    if(state)
+                        milli=0, sec++;
                     }
                  
-                sec=0;
-                
-                min++;
+                if(state)
+                    sec=0, min++;
                             
             }    
         }
